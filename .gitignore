@@ -1,0 +1,15 @@
+# Arquivos compilados e objetos do C
+*.o
+*.out
+*.exe
+*.a
+*.so
+
+# Pastas de compilação (se for usar)
+build/
+bin/
+obj/
+
+# Lixo do sistema operacional
+.DS_Store
+Thumbs.db
