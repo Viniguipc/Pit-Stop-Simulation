@@ -35,15 +35,16 @@ void escolhe_pneu (int* op){
 	}while (*op < 1 || *op > 4);
 }
 
-int trocando_pneu (int op){
+int trocando_pneu (int op, int* DNF){
 	char button;
 	
 	printf("Aperte \"x\" para desparafusar o pneu %d. ", op);
 	scanf(" %c", &button);
 	
 	if (button != 'x' && button != 'X'){
-		printf("Falha ao desparafusar o pneu %d! Abandonamos a Corrida DNF.", op);
+		printf("Falha ao desparafusar o pneu %d! Abandonamos a Corrida.", op);
 		
+		*DNF = 1;
 		return 0;
 	}
 	else{
@@ -51,8 +52,9 @@ int trocando_pneu (int op){
 		scanf(" %c", &button);
 		
 		if(button != 'y' && button != 'Y'){
-			printf("Falha ao colocar o pneu %d! Abandonamos a Corrida DNF.", op);
+			printf("Falha ao colocar o pneu %d! Abandonamos a Corrida.", op);
 			
+			*DNF = 1;
 			return 0;
 		}
 		else{
@@ -60,8 +62,9 @@ int trocando_pneu (int op){
 			scanf(" %c", &button);
 			
 			if(button != 'z' && button != 'Z'){
-				printf("Falha ao parafusar o pneu %d! Abandonamos a Corrida DNF.", op);
+				printf("Falha ao parafusar o pneu %d! Abandonamos a Corrida.", op);
 				
+				*DNF = 1;
 				return 0;
 			}
 			else{
@@ -73,7 +76,7 @@ int trocando_pneu (int op){
 }
 
 int main(){
-	int i, op, pneu[4] = {0, 0, 0, 0}, check;
+	int i, op, dnf = 0, pneu[4] = {0, 0, 0, 0}, check;
 	
 	printf("Pit Stop Simulation - The Game");
 	
@@ -81,11 +84,17 @@ int main(){
 		imprimir_pneu(pneu);
 		
 		escolhe_pneu(&op);
-		pneu[op - 1] = trocando_pneu(op);
+		pneu[op - 1] = trocando_pneu(op, &dnf);
 		
 		check = estado_pneu(pneu);
-	} while (check != 1 || op != 0);
+	} while (check != 1 && dnf == 0);
 	
-	printf("\nPit Stop concluido com sucesso!");
+	if (check == 1){
+		printf("\nPit Stop concluido com sucesso!");
+	}
+	else{
+		printf("\n\nDNF");
+	}
+	
 
 }
