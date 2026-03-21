@@ -1,7 +1,10 @@
+// Bibliotecas
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 
+//Função para imprimir o estado dos pneus na tela
+//FIX: Melhorar o layout
 void imprimir_pneu (int* vet){
 	char f[] = "Trocar", v[] = "Novo";
 	int i;
@@ -16,6 +19,7 @@ void imprimir_pneu (int* vet){
 	}
 }
 
+//Função que verifica o estado dos pneus e retorna 1 se todos os pneus foram trocados e 0 se ainda falta algumm pneu
 int estado_pneu (int* vet){
 	int check = 1, i;
 	
@@ -28,6 +32,7 @@ int estado_pneu (int* vet){
 	return check;
 }
 
+//Menu para escolher quaal pneu trocar, n impede de escolher um pneu ja trocado
 void escolhe_pneu (int* op){
 	do{
 		printf("\nEscolha o Pneu a ser trocado (1 a 4): ");
@@ -35,6 +40,7 @@ void escolhe_pneu (int* op){
 	}while (*op < 1 || *op > 4);
 }
 
+//Função para trocar o estado dos pneus, necessita apertar os botões certos, caso erre resulta em abandono (DNF)
 int trocando_pneu (int op, int* DNF){
 	char button;
 	
@@ -72,20 +78,20 @@ int trocando_pneu (int op, int* DNF){
 			}
 		}
 	}
-	
 }
 
 int main(){
 	int i, op, dnf = 0, pneu[4] = {0, 0, 0, 0}, check;
 	
-	printf("Pit Stop Simulation - The Game");
-	
 	do{
+		printf("Pit Stop Simulation - The Game\n");
+		
 		imprimir_pneu(pneu);
 		
 		escolhe_pneu(&op);
 		pneu[op - 1] = trocando_pneu(op, &dnf);
 		
+		system("cls");
 		check = estado_pneu(pneu);
 	} while (check != 1 && dnf == 0);
 	
@@ -95,6 +101,4 @@ int main(){
 	else{
 		printf("\n\nDNF");
 	}
-	
-
 }
