@@ -82,10 +82,10 @@ int trocando_pneu (int op, int* DNF){
 
 int main(){
 	int i, op, dnf = 0, pneu[4] = {0, 0, 0, 0}, check;
-	time_t tempo_inicio, tempo_fim;
+	clock_t tempo_inicio, tempo_fim;
 	double pit_time;
 	
-	time(&tempo_inicio);
+	tempo_inicio = clock();
 	
 	do{
 		printf("Pit Stop Simulation - The Game\n");
@@ -99,11 +99,11 @@ int main(){
 		check = estado_pneu(pneu);
 	} while (check != 1 && dnf == 0);
 	
-	time(&tempo_fim);
-	pit_time = difftime(tempo_fim, tempo_inicio);
+	tempo_fim = clock();
+	pit_time = ((double)(tempo_fim - tempo_inicio) * 1000) / CLOCKS_PER_SEC;
 	
 	if (check == 1){
-		printf("\nPit Stop concluido com sucesso!\nTempo: %.4f", pit_time);
+		printf("\nPit Stop concluido com sucesso!\nTempo: %.3f s", pit_time / 1000);
 	}
 	else{
 		printf("\n\nDNF");
