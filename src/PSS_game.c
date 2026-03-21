@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <conio.h>
 
 //Função para imprimir o estado dos pneus na tela
 //FIX: Melhorar o layout
@@ -36,7 +37,8 @@ int estado_pneu (int* vet){
 void escolhe_pneu (int* op){
 	do{
 		printf("\nEscolha o Pneu a ser trocado (1 a 4): ");
-		scanf("%d", op);
+		*op = _getche();
+		*op = *op - '0';
 	}while (*op < 1 || *op > 4);
 }
 
@@ -44,31 +46,31 @@ void escolhe_pneu (int* op){
 int trocando_pneu (int op, int* DNF){
 	char button;
 	
-	printf("Aperte \"x\" para desparafusar o pneu %d. ", op);
-	scanf(" %c", &button);
+	printf("\nAperte \"x\" para desparafusar o pneu %d. ", op);
+	button = _getche();
 	
 	if (button != 'x' && button != 'X'){
-		printf("Falha ao desparafusar o pneu %d! Abandonamos a Corrida.", op);
+		printf("\nFalha ao desparafusar o pneu %d! Abandonamos a Corrida.", op);
 		
 		*DNF = 1;
 		return 0;
 	}
 	else{
-		printf("Aperte \"y\" para colocar o pneu novo %d. ", op);
-		scanf(" %c", &button);
+		printf("\nAperte \"y\" para colocar o pneu novo %d. ", op);
+		button = _getche();
 		
 		if(button != 'y' && button != 'Y'){
-			printf("Falha ao colocar o pneu %d! Abandonamos a Corrida.", op);
+			printf("\nFalha ao colocar o pneu %d! Abandonamos a Corrida.", op);
 			
 			*DNF = 1;
 			return 0;
 		}
 		else{
-			printf("Aperte \"z\" para parafusar o novo pneu %d ", op);
-			scanf(" %c", &button);
+			printf("\nAperte \"z\" para parafusar o novo pneu %d ", op);
+			button = _getche();
 			
 			if(button != 'z' && button != 'Z'){
-				printf("Falha ao parafusar o pneu %d! Abandonamos a Corrida.", op);
+				printf("\nFalha ao parafusar o pneu %d! Abandonamos a Corrida.", op);
 				
 				*DNF = 1;
 				return 0;
