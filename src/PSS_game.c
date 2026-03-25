@@ -4,6 +4,24 @@
 #include <stdlib.h>
 #include <conio.h>
 
+typedef struct sv{
+	int fase;
+	float tempo[10];
+}save;
+
+void abrir_save(save* dados){
+	FILE *save;
+	
+	save = fopen("PSS.save", "rb");
+	
+	if(save == NULL){
+		printf("\nErro ao abrir save");
+	}
+	else{
+		fread(dados, sizeof(save), 1, &save);
+	}
+}
+
 //Função para imprimir o estado dos pneus na tela
 //FIX: Melhorar o layout
 void imprimir_pneu (int* vet){
