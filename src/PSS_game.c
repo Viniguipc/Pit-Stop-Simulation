@@ -2,12 +2,15 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#include <conio.h>
 
 typedef struct sv{
 	int fase;
 	float tempo[10];
 }save;
+
+void salvar_save(save* dados){
+	FILE *save;
+}
 
 void abrir_save(save* dados){
 	FILE *save;
@@ -18,7 +21,7 @@ void abrir_save(save* dados){
 		printf("\nErro ao abrir save");
 	}
 	else{
-		fread(dados, sizeof(save), 1, &save);
+		fread(dados, sizeof(save), 1, save);
 	}
 }
 
@@ -55,8 +58,7 @@ int estado_pneu (int* vet){
 void escolhe_pneu (int* op){
 	do{
 		printf("\nEscolha o Pneu a ser trocado (1 a 4): ");
-		*op = _getche();
-		*op = *op - '0';
+		scanf(" %d", op);
 	}while (*op < 1 || *op > 4);
 }
 
@@ -65,7 +67,7 @@ int trocando_pneu (int op, int* DNF){
 	char button;
 	
 	printf("\nAperte \"x\" para desparafusar o pneu %d. ", op);
-	button = _getche();
+	scanf(" %c", &button);
 	
 	if (button != 'x' && button != 'X'){
 		printf("\nFalha ao desparafusar o pneu %d! Abandonamos a Corrida.", op);
@@ -75,7 +77,7 @@ int trocando_pneu (int op, int* DNF){
 	}
 	else{
 		printf("\nAperte \"y\" para colocar o pneu novo %d. ", op);
-		button = _getche();
+		scanf(" %c", &button);
 		
 		if(button != 'y' && button != 'Y'){
 			printf("\nFalha ao colocar o pneu %d! Abandonamos a Corrida.", op);
@@ -85,7 +87,7 @@ int trocando_pneu (int op, int* DNF){
 		}
 		else{
 			printf("\nAperte \"z\" para parafusar o novo pneu %d ", op);
-			button = _getche();
+			scanf(" %c", &button);
 			
 			if(button != 'z' && button != 'Z'){
 				printf("\nFalha ao parafusar o pneu %d! Abandonamos a Corrida.", op);
@@ -101,11 +103,11 @@ int trocando_pneu (int op, int* DNF){
 }
 
 int main(){
-	int i, op, dnf = 0, pneu[4] = {0, 0, 0, 0}, check;
-	clock_t tempo_inicio, tempo_fim;
+	int op, dnf = 0, pneu[4] = {0, 0, 0, 0}, check;
+	struct timespec tempo_inicio, tempo_fim;
 	double pit_time;
 	
-	tempo_inicio = clock();
+	clock_gettime(CLOCK_MONOTONIC, &tempo_inicio);
 	
 	do{
 		printf("Pit Stop Simulation - The Game\n");
@@ -119,11 +121,11 @@ int main(){
 		check = estado_pneu(pneu);
 	} while (check != 1 && dnf == 0);
 	
-	tempo_fim = clock();
-	pit_time = ((double)(tempo_fim - tempo_inicio) * 1000) / CLOCKS_PER_SEC;
+	clock_gettime(CLOCK_MONOTONIC, &tempo_fim);
+	pit_time = (tempo_fim.tv_sec - tempo_inicio.tv_sec) + (tempo_fim.tv_nsec - tempo_inicio.tv_nsec) / 1e9;
 	
 	if (check == 1){
-		printf("\nPit Stop concluido com sucesso!\nTempo: %.3f s", pit_time / 1000);
+		printf("\nPit Stop concluido com sucesso!\nTempo: %.3f s", pit_time);
 	}
 	else{
 		printf("\n\nDNF");
