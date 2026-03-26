@@ -3,15 +3,27 @@
 #include <time.h>
 #include <stdlib.h>
 
+//Struct com os dados do save, a fase atual e os recordes de tempo de cada fase
 typedef struct sv{
 	int fase;
 	float tempo[10];
 }save;
 
+//Função para salvar novo save no arquivo .save
 void salvar_save(save* dados){
 	FILE *save;
+	
+	save = fopen("PSS.save", "wb");
+	
+	if(save == NULL){
+		printf("\nERRO ao salvar o arquivo");
+	}
+	else{
+		fwrite(dados, sizeof(struct sv), 1, save);
+	}
 }
 
+//Função para abrir o arquivo .save e ler a struct para pegar os dados
 void abrir_save(save* dados){
 	FILE *save;
 	
@@ -21,7 +33,7 @@ void abrir_save(save* dados){
 		printf("\nErro ao abrir save");
 	}
 	else{
-		fread(dados, sizeof(save), 1, save);
+		fread(dados, sizeof(struct sv), 1, save);
 	}
 }
 
@@ -117,7 +129,7 @@ int main(){
 		escolhe_pneu(&op);
 		pneu[op - 1] = trocando_pneu(op, &dnf);
 		
-		system("cls");
+		system("clear");
 		check = estado_pneu(pneu);
 	} while (check != 1 && dnf == 0);
 	
