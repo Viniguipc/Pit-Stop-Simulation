@@ -11,6 +11,14 @@ typedef struct sv{
 	float tempo[FASE];
 }save;
 
+void fase1(save* dados){
+	
+}
+void fase2(save* dados){
+	
+}
+
+//Função menu inicial para começar o jogo, fechar ou conferir tempos
 void menu_inicial(int* op){
 	do{
 		printf("\n\n\tMENU\n");
@@ -19,6 +27,10 @@ void menu_inicial(int* op){
 		printf("\n----------\n");
 		scanf(" %d", op);
 	}while(*op < 1 || *op > 3);
+}
+
+void menu_fases(int* op, int fase_atual){
+	
 }
 
 //Função para salvar novo save no arquivo .save
@@ -36,7 +48,7 @@ void salvar_save(save* dados){
 	}
 }
 
-//Função para abrir o arquivo .save e ler a struct para pegar os dados
+//Função para abrir o arquivo .save e ler a struct para pegar os dados, caso n haja .save ela cria um 
 void abrir_save(save* dados){
 	FILE *save;
 	int i;
@@ -64,6 +76,11 @@ void abrir_save(save* dados){
 		fclose(save);
 	}
 }
+
+void (*fases[])(save*) = {
+	fase1,
+	fase2
+};
 
 //Função para imprimir o estado dos pneus na tela
 //FIX: Melhorar o layout
@@ -150,6 +167,16 @@ int main(){
 	
 	abrir_save(&dados);
 	menu_inicial(&op);
+	
+	switch(op){
+		case 1:
+			menu_fases(&op, dados.fase);
+			fases[op - 1](&dados);
+			break;
+		case 2:
+			
+			break;
+	}
 	
 	
 	/*
