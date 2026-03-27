@@ -3,10 +3,12 @@
 #include <time.h>
 #include <stdlib.h>
 
+#define FASE 2
+
 //Struct com os dados do save, a fase atual e os recordes de tempo de cada fase
 typedef struct sv{
 	int fase;
-	float tempo[10];
+	float tempo[FASE];
 }save;
 
 void menu_inicial(int* op){
@@ -30,20 +32,36 @@ void salvar_save(save* dados){
 	}
 	else{
 		fwrite(dados, sizeof(struct sv), 1, save);
+		fclose(save);
 	}
 }
 
 //Função para abrir o arquivo .save e ler a struct para pegar os dados
 void abrir_save(save* dados){
 	FILE *save;
+	int i;
 	
 	save = fopen("PSS.save", "rb");
 	
 	if(save == NULL){
-		printf("\nErro ao abrir save");
+		save = fopen("PSS.save", "wb");
+		
+		if(save == NULL){
+			printf("\nERRO");
+		}
+		else{
+			dados->fase = 0;
+			for(i; i < FASE; i++){
+				dados->tempo[i] = 0;
+			}
+			
+			fwrite(dados, sizeof(struct sv), 1, save);
+			fclose(save);
+		}
 	}
 	else{
 		fread(dados, sizeof(struct sv), 1, save);
+		fclose(save);
 	}
 }
 
