@@ -30,7 +30,21 @@ void menu_inicial(int* op){
 }
 
 void menu_fases(int* op, int fase_atual){
-	
+	int i;
+	do{
+		printf("\n\n\tESCOLHA A FASE: \n");
+		printf("\n----------");
+		for(i = 0; i < FASE; i++){
+			if(fase_atual <= i){
+				printf("\nFase %d - Selecionar", i + 1);
+			}
+			else{
+				printf("\nFase %d - Bloqueada", i + 1);
+			}
+		}
+		printf("\n----------\n");
+		scanf(" %d", op);
+	}while(*op < 1 || *op > fase_atual);
 }
 
 //Função para salvar novo save no arquivo .save
