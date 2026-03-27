@@ -9,6 +9,16 @@ typedef struct sv{
 	float tempo[10];
 }save;
 
+void menu_inicial(int* op){
+	do{
+		printf("\n\n\tMENU\n");
+		printf("\n----------");
+		printf("\n1 - Iniciar Jogo\n2 - Verificar Tempos\n3 - Sair");
+		printf("\n----------\n");
+		scanf(" %d", op);
+	}while(*op < 1 || *op > 3);
+}
+
 //Função para salvar novo save no arquivo .save
 void salvar_save(save* dados){
 	FILE *save;
@@ -115,10 +125,16 @@ int trocando_pneu (int op, int* DNF){
 }
 
 int main(){
-	int op, dnf = 0, pneu[4] = {0, 0, 0, 0}, check;
+	int op;
 	struct timespec tempo_inicio, tempo_fim;
 	double pit_time;
+	save dados;
 	
+	abrir_save(&dados);
+	menu_inicial(&op);
+	
+	
+	/*
 	clock_gettime(CLOCK_MONOTONIC, &tempo_inicio);
 	
 	do{
@@ -142,4 +158,5 @@ int main(){
 	else{
 		printf("\n\nDNF");
 	}
+	*/
 }
