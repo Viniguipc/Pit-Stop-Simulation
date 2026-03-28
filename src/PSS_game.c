@@ -12,8 +12,35 @@ typedef struct sv{
 }save;
 
 void fase1(save* dados){
+	int i, op, dnf = 0, pneu[4] = {0, 0, 0, 0}, check;
+	struct timespec tempo_inicio, tempo_fim;
+	double pit_time;
 	
+	clock_gettime(CLOCK_MONOTONIC, &tempo_inicio);
+	
+	do{
+		printf("Pit Stop Simulation - The Game\n");
+		
+		imprimir_pneu(pneu);
+		
+		escolhe_pneu(&op);
+		pneu[op - 1] = trocando_pneu(op, &dnf);
+		
+		system("clear");
+		check = estado_pneu(pneu);
+	} while (check != 1 && dnf == 0);
+	
+	clock_gettime(CLOCK_MONOTONIC, &tempo_fim);
+	pit_time = (tempo_fim.tv_sec - tempo_inicio.tv_sec) + (tempo_fim.tv_nsec - tempo_inicio.tv_nsec) / 1e9;
+	
+	if (check == 1){
+		printf("\nPit Stop concluido com sucesso!\nTempo: %.3f s", pit_time);
+	}
+	else{
+		printf("\n\nDNF");
+	}
 }
+
 void fase2(save* dados){
 	
 }
@@ -30,21 +57,7 @@ void menu_inicial(int* op){
 }
 
 void menu_fases(int* op, int fase_atual){
-	int i;
-	do{
-		printf("\n\n\tESCOLHA A FASE: \n");
-		printf("\n----------");
-		for(i = 0; i < FASE; i++){
-			if(fase_atual <= i){
-				printf("\nFase %d - Selecionar", i + 1);
-			}
-			else{
-				printf("\nFase %d - Bloqueada", i + 1);
-			}
-		}
-		printf("\n----------\n");
-		scanf(" %d", op);
-	}while(*op < 1 || *op > fase_atual);
+	
 }
 
 //Função para salvar novo save no arquivo .save
@@ -191,31 +204,4 @@ int main(){
 			
 			break;
 	}
-	
-	
-	/*
-	clock_gettime(CLOCK_MONOTONIC, &tempo_inicio);
-	
-	do{
-		printf("Pit Stop Simulation - The Game\n");
-		
-		imprimir_pneu(pneu);
-		
-		escolhe_pneu(&op);
-		pneu[op - 1] = trocando_pneu(op, &dnf);
-		
-		system("clear");
-		check = estado_pneu(pneu);
-	} while (check != 1 && dnf == 0);
-	
-	clock_gettime(CLOCK_MONOTONIC, &tempo_fim);
-	pit_time = (tempo_fim.tv_sec - tempo_inicio.tv_sec) + (tempo_fim.tv_nsec - tempo_inicio.tv_nsec) / 1e9;
-	
-	if (check == 1){
-		printf("\nPit Stop concluido com sucesso!\nTempo: %.3f s", pit_time);
-	}
-	else{
-		printf("\n\nDNF");
-	}
-	*/
 }
