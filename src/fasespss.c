@@ -48,7 +48,45 @@ void fase1(save* dados){
 }
 
 void fase2(save* dados){
+	int i, op, pneu[4] = {0, 0, 0, 0}, check, asa;
+	struct timespec tempo_inicio, tempo_fim;
+	double pit_time, penalidade;
 	
+	clock_gettime(CLOCK_MONOTONIC, &tempo_inicio);
+	
+	do{
+		printf("Pit Stop Simulation - The Game\n");
+		
+		imprimir_pneu(pneu);
+		
+		escolhe_pneu(&op);
+		pneu[op - 1] = trocando_pneu(op, &penalidade);
+		
+		system("cls");
+		check = estado_pneu(pneu);
+		
+	} while (check != 1);
+	
+	trocando_asa(&penalidade, &asa);
+		
+	system("cls");
+	
+	clock_gettime(CLOCK_MONOTONIC, &tempo_fim);
+	pit_time = ((tempo_fim.tv_sec - tempo_inicio.tv_sec) + (tempo_fim.tv_nsec - tempo_inicio.tv_nsec) / 1e9) + penalidade;
+	
+	printf("\nPit Stop concluido com sucesso!\nTempo: %.3f s", pit_time);
+	
+	if(dados->tempo[1] == 0){
+		dados->tempo[1] = pit_time;
+	}
+	else{
+		if(dados->tempo[1] > pit_time){
+			dados->tempo[1] = pit_time;
+		}
+	}
+	if(dados->fase < 2){
+		dados->fase = 2;
+	}
 }
 
 void (*fases[])(save*) = {
