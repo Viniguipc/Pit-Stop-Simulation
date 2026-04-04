@@ -39,7 +39,7 @@ void escolhe_pneu (int* op){
 	}while (*op < 1 || *op > 4);
 }
 
-//Função para trocar o estado dos pneus, necessita apertar os botões certos, caso erre resulta em abandono (DNF)
+//Função para trocar o estado dos pneus, necessita apertar os botões certos, caso erre resulta penalidade de tempo
 int trocando_pneu (int op, double* penalidade){
 	char button;
 	
@@ -64,7 +64,7 @@ int trocando_pneu (int op, double* penalidade){
 				}
 				else{
 					do{
-						printf("\nAperte \"z\" para parafusar o novo pneu %d ", op);
+						printf("\nAperte \"z\" para parafusar o novo pneu %d. ", op);
 						scanf(" %c", &button);
 					
 						if(button != 'z' && button != 'Z'){
@@ -82,4 +82,67 @@ int trocando_pneu (int op, double* penalidade){
 	}while(button != 'x' && button != 'X');
 }
 
+void trocando_asa (double* penalidade){
+	char button;
+	
+	do{
+		printf("\nAperte \"w\" três vezes para soltar os parafusos centrais da asa: ");
+		scanf(" %c", &button);
+		
+		if(button != 'w' && button != 'W'){
+			printf("\nFalha ao soltar o primeiro parafuso, tente novamente! Perdemos 2.5 s");
+			
+			*penalidade = *penalidade + 2.5;
+		}
+		else{
+			do{
+				scanf(" %c", &button);
+				
+				if(button != 'w' && button != 'W'){
+					printf("\nFalha ao soltar o primeiro parafuso, tente novamente! Perdemos 2.5 s");
+					
+					*penalidade = *penalidade + 2.5;
+				}
+				else{
+					do{
+						scanf(" %c", &button);
+						
+						if(button != 'w' && button != 'W'){
+							printf("\nFalha ao soltar o primeiro parafuso, tente novamente! Perdemos 2.5 s");
+						
+							*penalidade = *penalidade + 2.5;
+						}
+						else{
+							do{
+								printf("\nAperte \"e\" para retirar a asa: ");
+								scanf(" %c", &button);
+									
+								if(button != 'e' && button != 'E'){
+									printf("\nFalaha ao retirar a asa! Perdemos 1.5 s");
+									
+									*penalidade = *penalidade + 1.5;
+								}
+								else{
+									do{
+										printf("\nAperte \"r\" para colocar a nova asa: ");
+										scanf(" %c", &button);
+									 	
+										if(button != 'r' && button != 'R'){
+											printf("Falha ao colocar a nova asa! Perdemos 4 .0 s");
+											
+											*penalidade = *penalidade + 4;
+										}
+										else{
+											printf("\nAsa trocada com sucesso!");
+										}
+									}while(button != 'r' && button != 'R');
+								}
+							}while(button != 'e' && button != 'E');
+						}
+					}while(button != 'w' && button != 'W');
+				}
+			}while(button != 'w' && button != 'W');
+		}
+	}while(button != 'w' && button != 'W');
+}
 
