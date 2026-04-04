@@ -4,7 +4,7 @@
 void imprimir_pneu (int* vet);
 int estado_pneu (int* vet);
 void escolhe_pneu (int* op);
-int trocando_pneu (int op, int* DNF);
+int trocando_pneu (int op, double* penalidade);
 
 
 #endif

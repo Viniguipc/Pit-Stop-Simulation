@@ -1,3 +1,7 @@
+#include <stdio.h>
+
+#include "mecanicapss.h"
+
 //Função para imprimir o estado dos pneus na tela
 //FIX: Melhorar o layout
 void imprimir_pneu (int* vet){
@@ -36,43 +40,46 @@ void escolhe_pneu (int* op){
 }
 
 //Função para trocar o estado dos pneus, necessita apertar os botões certos, caso erre resulta em abandono (DNF)
-int trocando_pneu (int op, int* DNF){
+int trocando_pneu (int op, double* penalidade){
 	char button;
 	
-	printf("\nAperte \"x\" para desparafusar o pneu %d. ", op);
-	scanf(" %c", &button);
-	
-	if (button != 'x' && button != 'X'){
-		printf("\nFalha ao desparafusar o pneu %d! Abandonamos a Corrida.", op);
-		
-		*DNF = 1;
-		return 0;
-	}
-	else{
-		printf("\nAperte \"y\" para colocar o pneu novo %d. ", op);
+	do{
+		printf("\nAperte \"x\" para desparafusar o pneu %d. ", op);
 		scanf(" %c", &button);
 		
-		if(button != 'y' && button != 'Y'){
-			printf("\nFalha ao colocar o pneu %d! Abandonamos a Corrida.", op);
+		if (button != 'x' && button != 'X'){
+			printf("\nFalha ao desparafusar o pneu %d! Perdemos 2.5 s.", op);
 			
-			*DNF = 1;
-			return 0;
+			*penalidade = *penalidade + 2.5;
 		}
 		else{
-			printf("\nAperte \"z\" para parafusar o novo pneu %d ", op);
-			scanf(" %c", &button);
-			
-			if(button != 'z' && button != 'Z'){
-				printf("\nFalha ao parafusar o pneu %d! Abandonamos a Corrida.", op);
+			do{
+				printf("\nAperte \"y\" para colocar o pneu novo %d. ", op);
+				scanf(" %c", &button);
 				
-				*DNF = 1;
-				return 0;
-			}
-			else{
-				return 1;
-			}
+				if(button != 'y' && button != 'Y'){
+					printf("\nFalha ao colocar o pneu %d! Perdemos 2.5 s.", op);
+					
+					*penalidade = *penalidade + 2.5;
+				}
+				else{
+					do{
+						printf("\nAperte \"z\" para parafusar o novo pneu %d ", op);
+						scanf(" %c", &button);
+					
+						if(button != 'z' && button != 'Z'){
+							printf("\nFalha ao parafusar o pneu %d! Perdemos 2.5 s.", op);
+							
+							*penalidade = *penalidade + 2.5;
+						}
+						else{
+							return 1;
+						}
+					}while(button != 'z' && button != 'Z');
+				}
+			}while(button != 'y' && button != 'Y');
 		}
-	}
+	}while(button != 'x' && button != 'X');
 }
 
 

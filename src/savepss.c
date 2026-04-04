@@ -33,7 +33,7 @@ void abrir_save(save* dados){
 		}
 		else{
 			dados->fase = 0;
-			for(i; i < 2; i++){
+			for(i = 0; i < 2; i++){
 				dados->tempo[i] = 0;
 			}
 			
@@ -44,5 +44,16 @@ void abrir_save(save* dados){
 	else{
 		fread(dados, sizeof(struct sv), 1, save);
 		fclose(save);
+	}
+}
+
+void verificar_tempos(save* dados){
+	int i;
+	
+	printf("\nRecords de Tempo");
+	printf("\n----------");
+	
+	for(i = 0; i < 2; i++){
+		printf("\nFase %d -> %.3f s", i + 1, dados->tempo[i]);
 	}
 }

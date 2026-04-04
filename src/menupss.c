@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#include "menupss.h"
+
 //Função menu inicial para começar o jogo, fechar ou conferir tempos
 void menu_inicial(int* op){
 	do{

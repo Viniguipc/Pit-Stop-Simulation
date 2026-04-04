@@ -5,6 +5,6 @@
 
 void fase1(save* dados);
 void fase2(save* dados);
-void (*fases[])(save*);
+extern void (*fases[])(save*);
 
 #endif
