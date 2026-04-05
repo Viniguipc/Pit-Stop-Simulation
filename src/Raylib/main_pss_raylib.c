@@ -11,7 +11,7 @@ int main(){
 	abrir_save(&dados);
 	dados.fase = 2; //teste, retirar
 	
-	InitWindow(800, 600, "Pit Stop Simulation");
+	InitWindow(1200, 900, "Pit Stop Simulation");
 	SetTargetFPS(60);
 	
 	while(!WindowShouldClose() && op != 3){
@@ -24,6 +24,7 @@ int main(){
 				menu_fases(&fase, dados.fase);
 				break;
 			case 2:
+				verificar_tempos(&dados);
 				break;
 			case 4:
 				break;

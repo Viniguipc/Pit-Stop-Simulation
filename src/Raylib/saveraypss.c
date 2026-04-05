@@ -1,9 +1,8 @@
 #include <stdio.h>
 
-#include "raylib.h"
-#include "saverpss.h"
+#include "savepss.h"
 
-//FunÃ§Ã£o para salvar novo save no arquivo .save
+//Função para salvar novo save no arquivo .save
 void salvar_save(save* dados){
 	FILE *save;
 	
@@ -18,7 +17,7 @@ void salvar_save(save* dados){
 	}
 }
 
-//FunÃ§Ã£o para abrir o arquivo .save e ler a struct para pegar os dados, caso n haja .save ela cria um 
+//Função para abrir o arquivo .save e ler a struct para pegar os dados, caso n haja .save ela cria um 
 //FIX: Criar um sistema para quando o .save estiver com a array de tempos com uma quantidade fases menor que o atual ele n deixe as fases faltantes com lixo de memoria e coloque 0
 void abrir_save(save* dados){
 	FILE *save;
@@ -51,15 +50,10 @@ void abrir_save(save* dados){
 void verificar_tempos(save* dados){
 	int i;
 	
-	BeginDrawing();
-		ClearBackground(BLACK);
-		
-		DrawText("Records de Tempo", ((GetScreenWidth() / 2) - (MeasureText("Records de Tempo", 40) / 2)), 50, 40, WHITE);
-		DrawText("----------------", ((GetScreenWidth() / 2) - (MeasureText("----------------", 40) / 2)), 100, 40, WHITE);
-		 
-		for(i = 0; i < 6; i++){
-			DrawText(TextFormat("Fase %d -> %.3f s", i + 1, dados->tempo[i]), ((GetScreenWidth() / 2) - (MeasureText("----------------", 40) / 2)), 50 * (i + 1) + 100, 40, WHITE);
-		}
-		
-	EndDrawing();
+	printf("\nRecords de Tempo");
+	printf("\n----------");
+	
+	for(i = 0; i < 2; i++){
+		printf("\nFase %d -> %.3f s", i + 1, dados->tempo[i]);
+	}
 }
