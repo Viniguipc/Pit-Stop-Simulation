@@ -22,11 +22,15 @@ int main(){
 				break;
 			case 1:
 				menu_fases(&fase, dados.fase);
+				if(fase != 0){
+					tela_atual = 4;
+				}
 				break;
 			case 2:
 				verificar_tempos(&dados);
 				break;
 			case 4:
+				fases[op - 1](&dados);
 				break;
 		}
 	}
