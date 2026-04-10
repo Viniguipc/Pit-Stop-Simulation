@@ -4,9 +4,16 @@
 
 
 void fase1(save* dados){
+	static int pneu = 0, escolhendo_pneu = 0;
+	
 	BeginDrawing();
 		ClearBackground(BLACK);
 		DrawText("FASE 1", ((GetScreenWidth() / 2) - (MeasureText("FASE 1", 40) / 2)), 50, 40, RED);
+		
+		if(escolhendo_pneu == 0){
+			escolhe_pneu(&pneu);
+		}
+		
 	EndDrawing();
 }
 
