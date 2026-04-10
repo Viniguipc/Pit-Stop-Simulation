@@ -19,6 +19,7 @@ int main(){
 			case 0:
 				menu_inicial(&op);
 				tela_atual = op;
+				op = 0;
 				break;
 			case 1:
 				menu_fases(&fase, dados.fase);
@@ -27,10 +28,24 @@ int main(){
 				}
 				break;
 			case 2:
-				verificar_tempos(&dados);
+				verificar_tempos(&dados, &tela_atual);
 				break;
 			case 4:
-				fases[op - 1](&dados);
+				switch(fase){
+					case 1:
+						fase1(&dados);
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					case 4:
+						break;
+					case 5:
+						break;
+					case 6:
+						break;
+				}
 				break;
 		}
 	}

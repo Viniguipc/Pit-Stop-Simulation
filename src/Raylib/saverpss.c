@@ -34,7 +34,7 @@ void abrir_save(save* dados){
 		}
 		else{
 			dados->fase = 0;
-			for(i = 0; i < 2; i++){
+			for(i = 0; i < 6; i++){
 				dados->tempo[i] = 0;
 			}
 			
@@ -48,12 +48,13 @@ void abrir_save(save* dados){
 	}
 }
 
-void verificar_tempos(save* dados){
+void verificar_tempos(save* dados, int* tela){
 	int i;
 	
 	BeginDrawing();
 		ClearBackground(BLACK);
 		
+		DrawText("* Precione ENTER para voltar ao MENU", 10, 10, 10, LIGHTGRAY);
 		DrawText("Records de Tempo", ((GetScreenWidth() / 2) - (MeasureText("Records de Tempo", 40) / 2)), 50, 40, WHITE);
 		DrawText("----------------", ((GetScreenWidth() / 2) - (MeasureText("----------------", 40) / 2)), 100, 40, WHITE);
 		 
@@ -61,5 +62,8 @@ void verificar_tempos(save* dados){
 			DrawText(TextFormat("Fase %d -> %.3f s", i + 1, dados->tempo[i]), ((GetScreenWidth() / 2) - (MeasureText("----------------", 40) / 2)), 50 * (i + 1) + 100, 40, WHITE);
 		}
 		
+		if(IsKeyPressed(KEY_ENTER)){
+			*tela = 0;
+		}
 	EndDrawing();
 }

@@ -3,7 +3,7 @@
 
  void menu_inicial(int* op){
 	char *opcoes[] = {"Iniciar Jogo", "Placar de Tempos", "Sair"};
-	static int escolha = 1;
+	static int escolha = 0;
 	int i;
 	
 	if(IsKeyPressed(KEY_ENTER)){
@@ -28,7 +28,7 @@
 	BeginDrawing();
 		ClearBackground(BLACK);
 		
-		DrawText("MENU INICIAL", ((GetScreenWidth() / 2) - (MeasureText("MENU INICIAL)", 40) / 2)), 50, 40, WHITE);
+		DrawText("MENU INICIAL", ((GetScreenWidth() / 2) - (MeasureText("MENU INICIAL", 40) / 2)), 50, 40, WHITE);
 		
 		for(i = 0; i < 3; i++){
 			if((i + 1) != escolha){

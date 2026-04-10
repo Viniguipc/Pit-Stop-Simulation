@@ -9,6 +9,6 @@ typedef struct sv{
 
 void salvar_save(save* dados);
 void abrir_save(save* dados);
-void verificar_tempos(save* dados);
+void verificar_tempos(save* dados, int* tela);
 
 #endif
