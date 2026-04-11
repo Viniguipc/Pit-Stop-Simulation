@@ -9,12 +9,15 @@ int estado_pneu (int* vet){
 	
 }
 
-void escolhe_pneu (int* op){
+void escolhe_pneu (int* op, int* estado){
 	static int escolha = 0;
 	int i;
 	
 	if(IsKeyPressed(KEY_ENTER)){
 		*op = escolha;
+		if(escolha != 0){
+			*estado = 0;
+		}
 	}
 	else{
 		if(IsKeyPressed(KEY_DOWN)){
@@ -45,7 +48,28 @@ void escolhe_pneu (int* op){
 }
 
 int trocando_pneu (int op, double* penalidade){
+	static int pit_step = 0;
 	
+	if(!IsKeyPressed(KEY_X) && pit_step == 0){
+		*penalidade += 2.5;
+	}
+	else{
+		pit_step = 1;
+		
+		if(!IsKeyPressed(KEY_Y) && pit_step == 1){
+			*penalidade += 2.5;
+		}
+		else{
+			pit_step = 2;
+			
+			if(!IsKeyPressed(KEY_Z)){
+				*penalidade += 2.5;
+			}
+			else{
+				pit_step = 3;
+			}
+		}
+	}
 }
 
 void trocando_asa (double* penalidade, int* asa){

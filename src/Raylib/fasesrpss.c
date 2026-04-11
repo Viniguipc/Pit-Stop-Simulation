@@ -4,14 +4,19 @@
 
 
 void fase1(save* dados){
-	static int pneu = 0, escolhendo_pneu = 0;
+	static int estado_pneu[4] = {0, 0, 0, 0};
+	static int pneu = 0, escolhendo_pneu = 1;
+	static double penalidade = 0;
 	
 	BeginDrawing();
 		ClearBackground(BLACK);
 		DrawText("FASE 1", ((GetScreenWidth() / 2) - (MeasureText("FASE 1", 40) / 2)), 50, 40, RED);
 		
-		if(escolhendo_pneu == 0){
-			escolhe_pneu(&pneu);
+		if(escolhendo_pneu == 1){
+			escolhe_pneu(&pneu, &escolhendo_pneu);
+		}
+		else{
+			estado_pneu[pneu - 1] = trocando_pneu(pneu, &penalidade);
 		}
 		
 	EndDrawing();

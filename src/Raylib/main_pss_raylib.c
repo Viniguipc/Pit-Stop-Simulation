@@ -9,7 +9,6 @@ int main(){
 	int op = 0, fase = 0, tela_atual = 0;
 	
 	abrir_save(&dados);
-	dados.fase = 2; //teste, retirar
 	
 	InitWindow(1200, 900, "Pit Stop Simulation");
 	SetTargetFPS(60);

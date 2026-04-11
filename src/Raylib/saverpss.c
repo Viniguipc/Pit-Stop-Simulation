@@ -33,7 +33,7 @@ void abrir_save(save* dados){
 			printf("\nERRO");
 		}
 		else{
-			dados->fase = 0;
+			dados->fase = 1;
 			for(i = 0; i < 6; i++){
 				dados->tempo[i] = 0;
 			}
