@@ -69,28 +69,37 @@ int trocando_pneu (int op, double* penalidade){
 				break;
 		}
 	}
-	
-	/*
-	if(!IsKeyPressed(KEY_X) && pit_step == 0){
-		*penalidade += 2.5;
-	}
 	else{
-		pit_step = 1;
-		
-		if(!IsKeyPressed(KEY_Y) && pit_step == 1){
-			*penalidade += 2.5;
+		switch(pit_step){
+			case 0:
+				if(!IsKeyPressed(KEY_X)){
+					*penalidade += 2.5;
+				}
+				else{
+					pit_step = 1;
+				}
+				break;
+			case 1:
+				if(!IsKeyPressed(KEY_Y)){
+					*penalidade += 2.5;
+				}
+				else{
+					pit_step = 2;
+				}
+				break;
+			case 2:
+				if(!IsKeyPressed(KEY_Z)){
+					*penalidade += 2.5;
+				}
+				else{
+					pit_step = 0;
+					return 1;
+				}
+				break;
 		}
-		else{
-			pit_step = 2;
-			
-			if(!IsKeyPressed(KEY_Z)){
-				*penalidade += 2.5;
-			}
-			else{
-				pit_step = 3;
-			}
-		}
-	}*/
+	}
+	
+	return 0;
 }
 
 void trocando_asa (double* penalidade, int* asa){
