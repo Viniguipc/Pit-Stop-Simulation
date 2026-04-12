@@ -4,9 +4,9 @@
 #include "mecanicarpss.h"
 
 
-void fase1(save* dados){
+void fase1(save* dados, int* tela){
 	static int estado_pneu[4] = {0, 0, 0, 0};
-	static int pneu = 0, escolhendo_pneu = 1, fase_completa = 0, check = 0;
+	static int pneu = 0, escolhendo_pneu = 1, fase_completa = 0, check = 0, salvando = 1;
 	static double penalidade = 0, tempo = 0, tempo_total = 0;
 	
 	BeginDrawing();
@@ -15,8 +15,19 @@ void fase1(save* dados){
 		
 		if(fase_completa == 1){
 			tempo_total = tempo + penalidade;
-			dados->tempo[0] = tempo_total;
-			salvar_save(dados);
+			
+			if(dados->tempo[0] > tempo_total){
+				dados->tempo[0] = tempo_total;
+			}
+			
+			if(dados->fase < 2){
+				dados->fase = 2;
+			}
+			
+			if(salvando == 1){
+				salvar_save(dados);
+				salvando = 0;
+			}
 			
 			DrawText("* Precione ENTER para voltar ao MENU", 10, 10, 10, LIGHTGRAY);
 			DrawText("Pit-Stop Concluido!", ((GetScreenWidth() / 2) - (MeasureText("Pit-Stop Concluido!", 40) / 2)), 250, 40, GREEN);
@@ -33,11 +44,17 @@ void fase1(save* dados){
 				penalidade = 0;
 				tempo = 0;
 				tempo_total = 0;
+				salvando = 1;
+				
+				*tela = 0;
 			}
 		}
 		else{
+			DrawText(TextFormat("[%.3f s]", tempo), 800, 50, 40, WHITE);
+			DrawText(TextFormat("+ %.3f", penalidade), 1000, 50, 40, RED);
+			
 			tempo += GetFrameTime();
-		
+			
 			if(escolhendo_pneu == 1){
 				escolhe_pneu(&pneu, &escolhendo_pneu);
 			}

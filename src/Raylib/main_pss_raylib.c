@@ -16,6 +16,7 @@ int main(){
 	while(!WindowShouldClose() && op != 3){
 		switch(tela_atual){
 			case 0:
+				fase = 0;
 				menu_inicial(&op);
 				tela_atual = op;
 				op = 0;
@@ -32,7 +33,7 @@ int main(){
 			case 4:
 				switch(fase){
 					case 1:
-						fase1(&dados);
+						fase1(&dados, &tela_atual);
 						break;
 					case 2:
 						break;
