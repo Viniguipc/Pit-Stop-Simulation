@@ -102,7 +102,7 @@ int trocando_pneu (int op, double* penalidade){
 	return 0;
 }
 
-int trocando_asa (double* penalidade, int* asa){
+int trocando_asa (double* penalidade){
 	static int pit_step = 0;
 	
 	if(GetKeyPressed() == 0){

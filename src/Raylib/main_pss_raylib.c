@@ -36,6 +36,7 @@ int main(){
 						fase1(&dados, &tela_atual);
 						break;
 					case 2:
+						fase2(&dados, &tela_atual);
 						break;
 					case 3:
 						break;

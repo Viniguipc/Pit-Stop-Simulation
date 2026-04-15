@@ -4,7 +4,7 @@
 #define FASESPSS_H
 
 void fase1(save* dados, int* tela);
-void fase2(save* dados);
+void fase2(save* dados, int* tela);
 void fase3(save* dados);
 void fase4(save* dados);
 void fase5(save* dados);
