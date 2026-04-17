@@ -103,7 +103,7 @@ int trocando_pneu (int op, double* penalidade){
 }
 
 int trocando_asa (double* penalidade){
-	static int pit_step = 0;
+	static int pit_step = 0, i = 0;
 	
 	if(GetKeyPressed() == 0){
 		switch(pit_step){
@@ -127,15 +127,19 @@ int trocando_asa (double* penalidade){
 	else{
 		switch(pit_step){
 			case 0:
-				if(!IsKeyPressed(KEY_X)){
+				if(!IsKeyPressed(KEY_W)){
 					*penalidade += 2.5;
 				}
 				else{
-					pit_step = 1;
+					i++;
+					
+					if(i == 3){
+						pit_step = 1;
+					}
 				}
 				break;
 			case 1:
-				if(!IsKeyPressed(KEY_Y)){
+				if(!IsKeyPressed(KEY_E)){
 					*penalidade += 2.5;
 				}
 				else{
@@ -143,10 +147,11 @@ int trocando_asa (double* penalidade){
 				}
 				break;
 			case 2:
-				if(!IsKeyPressed(KEY_Z)){
+				if(!IsKeyPressed(KEY_R)){
 					*penalidade += 2.5;
 				}
 				else{
+					i = 0;
 					pit_step = 0;
 					return 1;
 				}

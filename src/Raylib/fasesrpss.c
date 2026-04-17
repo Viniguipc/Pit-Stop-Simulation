@@ -72,14 +72,8 @@ void fase1(save* dados, int* tela){
 			}
 			
 			if(check == 4){
+				fase_completa = 1;
 				check = 0;
-				
-				if(estado_asa == 1){
-					fase_completa = 1;
-				}
-				else{
-					estado_asa = trocando_asa(&penalidade, )
-				}
 			}
 			else{
 				check = 0;
@@ -90,7 +84,7 @@ void fase1(save* dados, int* tela){
 
 void fase2(save* dados, int* tela){
 	static int estado_pneu[4] = {0, 0, 0, 0};
-	static int pneu = 0, escolhendo_pneu = 1, fase_completa = 0, check = 0, salvando = 1;
+	static int pneu = 0, escolhendo_pneu = 1, fase_completa = 0, check = 0, salvando = 1, estado_asa = 0;
 	static double penalidade = 0, tempo = 0, tempo_total = 0;
 	
 	BeginDrawing();
@@ -129,6 +123,7 @@ void fase2(save* dados, int* tela){
 				tempo = 0;
 				tempo_total = 0;
 				salvando = 1;
+				estado_asa = 0;
 				
 				*tela = 0;
 			}
@@ -156,8 +151,14 @@ void fase2(save* dados, int* tela){
 			}
 			
 			if(check == 4){
-				fase_completa = 1;
 				check = 0;
+				
+				if(estado_asa == 1){
+					fase_completa = 1;
+				}
+				else{
+					estado_asa = trocando_asa(&penalidade);
+				}
 			}
 			else{
 				check = 0;
