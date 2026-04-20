@@ -3,7 +3,7 @@
 
  void menu_inicial(int* op){
 	char *opcoes[] = {"Iniciar Jogo", "Placar de Tempos", "Sair"};
-	static int escolha = 0;
+	static int escolha = 1;
 	int i;
 	
 	if(IsKeyPressed(KEY_ENTER)){
@@ -43,8 +43,8 @@
 
 //Mudar de lista para carrocel
 void menu_fases(int* op, int fase_atual){
-	char *opcoes[] = {"Iniciar Jogo", "Placar de Tempos", "Sair"};
-	int i, escolha;
+	int i;
+	static int escolha = 1;
 	
 	if(IsKeyPressed(KEY_ENTER)){
 		if(escolha > fase_atual){

@@ -10,7 +10,7 @@ int estado_pneu (int* vet){
 }
 
 void escolhe_pneu (int* op, int* estado){
-	static int escolha = 0;
+	static int escolha = 1;
 	int i;
 	
 	if(IsKeyPressed(KEY_ENTER)){
@@ -110,17 +110,17 @@ int trocando_asa (double* penalidade){
 			case 0:
 				DrawCircle((GetScreenWidth() / 2), (GetScreenHeight() / 2), 30, RED);
 				DrawText("w", ((GetScreenWidth() / 2) - (MeasureText("w", 30) / 2)), ((GetScreenHeight() / 2) - (MeasureText("w", 30))), 30, BLACK);
-				DrawText("Rapido! Aperte [w] para desparafusar o pneu", ((GetScreenWidth() / 2) - (MeasureText("Rapido! Aperte [w] para desparafusar o pneu", 20) / 2)), 300, 20, GREEN);
+				DrawText("Rapido! Aperte [w] para desparafusar a asa", ((GetScreenWidth() / 2) - (MeasureText("Rapido! Aperte [w] para desparafusar a asa", 20) / 2)), 300, 20, GREEN);
 				break;
 			case 1: 
 				DrawCircle((GetScreenWidth() / 2), (GetScreenHeight() / 2), 30, ORANGE);
 				DrawText("e", ((GetScreenWidth() / 2) - (MeasureText("e", 30) / 2)), ((GetScreenHeight() / 2) - (MeasureText("e", 30) / 2)), 30, BLACK);
-				DrawText("Rapido! Aperte [e] para trocar o pneu", ((GetScreenWidth() / 2) - (MeasureText("Rapido! Aperte [e] para trocar o pneu", 20) / 2)), 300, 20, GREEN);
+				DrawText("Rapido! Aperte [e] para trocar a asa", ((GetScreenWidth() / 2) - (MeasureText("Rapido! Aperte [e] para trocar a asa", 20) / 2)), 300, 20, GREEN);
 				break;
 			case 2:
 				DrawCircle((GetScreenWidth() / 2), (GetScreenHeight() / 2), 30, GREEN);
 				DrawText("r", ((GetScreenWidth() / 2) - (MeasureText("r", 30) / 2)), ((GetScreenHeight() / 2) - (MeasureText("r", 30) / 2)), 30, BLACK);
-				DrawText("Rapido! Aperte [r] para parafusar o pneu", ((GetScreenWidth() / 2) - (MeasureText("Rapido! Aperte [r] para parafusar o pneu", 20) / 2)), 300, 20, GREEN);
+				DrawText("Rapido! Aperte [r] para parafusar a asa", ((GetScreenWidth() / 2) - (MeasureText("Rapido! Aperte [r] para parafusar a asa", 20) / 2)), 300, 20, GREEN);
 				break;
 		}
 	}

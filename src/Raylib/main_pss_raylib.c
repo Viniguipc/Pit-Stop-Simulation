@@ -39,12 +39,11 @@ int main(){
 						fase2(&dados, &tela_atual);
 						break;
 					case 3:
-						break;
 					case 4:
-						break;
 					case 5:
-						break;
 					case 6:
+						tela_atual = 1;
+						fase = 0;
 						break;
 				}
 				break;
