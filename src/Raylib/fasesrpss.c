@@ -1,4 +1,4 @@
-#include "fasesrpss.h"
+	#include "fasesrpss.h"
 #include "raylib.h"
 #include "saverpss.h"
 #include "mecanicarpss.h"
@@ -16,12 +16,12 @@ void fase1(save* dados, int* tela){
 		if(fase_completa == 1){
 			tempo_total = tempo + penalidade;
 			
-			if(dados->tempo[1] > tempo_total){
-				dados->tempo[1] = tempo_total;
+			if(dados->tempo[0] == 0 || dados->tempo[0] > tempo_total){
+				dados->tempo[0] = tempo_total;
 			}
 			
-			if(dados->fase < 3){
-				dados->fase = 3;
+			if(dados->fase < 2){
+				dados->fase = 2;
 			}
 			
 			if(salvando == 1){
@@ -94,12 +94,12 @@ void fase2(save* dados, int* tela){
 		if(fase_completa == 1){
 			tempo_total = tempo + penalidade;
 			
-			if(dados->tempo[0] > tempo_total){
-				dados->tempo[0] = tempo_total;
+			if(dados->tempo[1] == 0 || dados->tempo[1] > tempo_total){
+				dados->tempo[1] = tempo_total;
 			}
 			
-			if(dados->fase < 2){
-				dados->fase = 2;
+			if(dados->fase < 3){
+				dados->fase = 3;
 			}
 			
 			if(salvando == 1){
@@ -134,16 +134,6 @@ void fase2(save* dados, int* tela){
 			
 			tempo += GetFrameTime();
 			
-			if(escolhendo_pneu == 1){
-				escolhe_pneu(&pneu, &escolhendo_pneu);
-			}
-			else{
-				estado_pneu[pneu - 1] = trocando_pneu(pneu, &penalidade);
-				if(estado_pneu[pneu - 1] != 0){
-					escolhendo_pneu = 1;
-				}
-			}
-			
 			for(int i = 0; i < 4; i++){
 				if(estado_pneu[i] == 1){
 					check++;
@@ -162,6 +152,16 @@ void fase2(save* dados, int* tela){
 			}
 			else{
 				check = 0;
+				
+				if(escolhendo_pneu == 1){
+					escolhe_pneu(&pneu, &escolhendo_pneu);
+				}
+				else{
+					estado_pneu[pneu - 1] = trocando_pneu(pneu, &penalidade);
+					if(estado_pneu[pneu - 1] != 0){
+						escolhendo_pneu = 1;
+					}
+				}
 			}
 		}
 	EndDrawing();
